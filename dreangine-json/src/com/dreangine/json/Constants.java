@@ -22,6 +22,7 @@ public final class Constants {
 	public static final char VALUE_COMMA = '\u002c';
 	public static final char VALUE_COLON = '\u003a';
 	public static final char VALUE_LEFT_SQUARE_BRACKET = '\u005b';
+	public static final char VALUE_SOLIDUS = '\u002f';
 	public static final char VALUE_REVERSE_SOLIDUS = '\\';
 	public static final char VALUE_RIGHT_SQUARE_BRACKET = '\u005d';
 	public static final char VALUE_LEFT_CURLY_BRACKET = '\u007b';

@@ -11,6 +11,7 @@ import static com.dreangine.json.Constants.VALUE_QUOTATION;
 import static com.dreangine.json.Constants.VALUE_REVERSE_SOLIDUS;
 import static com.dreangine.json.Constants.VALUE_RIGHT_CURLY_BRACKET;
 import static com.dreangine.json.Constants.VALUE_RIGHT_SQUARE_BRACKET;
+import static com.dreangine.json.Constants.VALUE_SOLIDUS;
 
 import com.dreangine.json.error.ErrorJSON;
 import com.dreangine.json.error.ErrorJSONBadValue;
@@ -38,7 +39,7 @@ public class JSONParser {
 				return null;
 			else if (valueStr.length() >= 2 && valueStr.charAt(0) == VALUE_QUOTATION
 					&& valueStr.charAt(valueStr.length() - 1) == VALUE_QUOTATION)
-				return valueStr.substring(1, valueStr.length() - 1);
+				return validateString(valueStr.substring(1, valueStr.length() - 1));
 			else if (valueStr.matches(REGEX_NUMBER)) {
 				// It must be a number
 				Number nbr = Long.valueOf(valueStr);
@@ -80,7 +81,7 @@ public class JSONParser {
 				
 				// Skip escaped chars
 				if (current == VALUE_REVERSE_SOLIDUS) {
-					i++;
+					i = skipEscaped(jsonStr, i);
 					continue;
 				}
 				
@@ -189,5 +190,39 @@ public class JSONParser {
 	private static void validateLayout(String str, char first, char last) throws ErrorJSONInvalid {
 		if (str == null || str.length() < 2 || str.charAt(0) != first || str.charAt(str.length() - 1) != last)
 			throw new ErrorJSONInvalid(str);
+	}
+	
+	private static String validateString(String str) throws ErrorJSONBadValue {
+		for (int i = 0; i < str.length(); i++) {
+			switch (str.charAt(i)) {
+			case VALUE_REVERSE_SOLIDUS:
+				// Skip escaped chars
+				i = skipEscaped(str, i);
+				continue;
+			case VALUE_QUOTATION:
+				throw new ErrorJSONBadValue(str);
+			default:
+				break;
+			}
+		}
+		return str;
+	}
+	
+	private static int skipEscaped(String str, int current) throws ErrorJSONBadValue {
+		switch (str.charAt(current+1)) {
+		case VALUE_QUOTATION:
+		case VALUE_REVERSE_SOLIDUS:
+		case VALUE_SOLIDUS:
+		case 'b':
+		case 'f':
+		case 'n':
+		case 'r':
+		case 't':
+			return current + 1;
+		case 'u':
+			return current + 5;
+		default:
+			throw new ErrorJSONBadValue(str);
+		}
 	}
 }
