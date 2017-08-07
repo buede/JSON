@@ -99,12 +99,11 @@ public class JSONArray implements Iterable<Object> {
 				sb.append(VALUE_COMMA);
 			if (element != null) {
 				if (element instanceof String)
-					sb.append(VALUE_QUOTATION);				
+					sb.append(VALUE_QUOTATION);
 				sb.append(element);
 				if (element instanceof String)
-					sb.append(VALUE_QUOTATION);				
-			}
-			else
+					sb.append(VALUE_QUOTATION);
+			} else
 				sb.append(TEXT_NULL);
 		}
 		sb.append(VALUE_RIGHT_SQUARE_BRACKET);
@@ -112,7 +111,9 @@ public class JSONArray implements Iterable<Object> {
 		return sb.toString();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Iterable#iterator()
 	 */
 	@Override

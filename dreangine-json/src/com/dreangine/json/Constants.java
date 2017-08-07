@@ -6,12 +6,13 @@ package com.dreangine.json;
  */
 @SuppressWarnings("nls")
 public final class Constants {
-	private Constants() {}
-	
+	private Constants() {
+	}
+
 	public static final String MSG_ERROR_JSON_BAD_VALUE = "This is not a valid value!";
 	public static final String MSG_ERROR_JSON_UNSUPPORTED_VALUE = "This value type is not supported!";
 	public static final String MSG_ERROR_JSON_INVALID = "This is not a valid JSON!";
-	
+
 	public static final String REGEX_NUMBER = "^[-]?\\d+([eE][-+]?\\d+)?$";
 	public static final String REGEX_NUMBER_DECIMAL = "^[-]?\\d+\\.\\d+([eE][-+]?\\d+)?$";
 

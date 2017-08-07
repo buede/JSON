@@ -73,18 +73,18 @@ public class JSONParser {
 
 		validateLayout(jsonStr, VALUE_LEFT_CURLY_BRACKET, VALUE_RIGHT_CURLY_BRACKET);
 
-			// If it's not an empty JSON
+		// If it's not an empty JSON
 		if (jsonStr.length() > 2) {
 			start = 2;
 			for (int i = 0; i < jsonStr.length(); i++) {
 				current = jsonStr.charAt(i);
-				
+
 				// Skip escaped chars
 				if (current == VALUE_REVERSE_SOLIDUS) {
 					i = skipEscaped(jsonStr, i);
 					continue;
 				}
-				
+
 				// Quotation
 				if (current == VALUE_QUOTATION)
 					openQuotation = !openQuotation;
@@ -96,11 +96,10 @@ public class JSONParser {
 					else if (current == VALUE_RIGHT_SQUARE_BRACKET || current == VALUE_RIGHT_CURLY_BRACKET) {
 						// ] and }
 						openBrackets--;
-						
+
 						if (openBrackets == 0)
 							jsonObj.add(key, getValue(jsonStr.substring(start, i)));
-					}
-					else if (current == VALUE_COLON && openBrackets == 1) {
+					} else if (current == VALUE_COLON && openBrackets == 1) {
 						// :
 						// only if it is on the same level as the most
 						// external
@@ -119,7 +118,7 @@ public class JSONParser {
 					}
 				}
 			}
-			
+
 			if (openQuotation || openBrackets > 0 || (colonCount > 0 && commaCount != colonCount - 1)) {
 				jsonObj.clear();
 				throw new ErrorJSONInvalid(jsonStr);
@@ -145,13 +144,13 @@ public class JSONParser {
 			start = 1;
 			for (int i = 0; i < jsonStr.length(); i++) {
 				current = jsonStr.charAt(i);
-				
+
 				// Skip escaped chars
 				if (current == VALUE_REVERSE_SOLIDUS) {
 					i++;
 					continue;
 				}
-				
+
 				// Quotation
 				if (current == VALUE_QUOTATION)
 					openQuotation = !openQuotation;
@@ -163,11 +162,10 @@ public class JSONParser {
 					else if (current == VALUE_RIGHT_SQUARE_BRACKET || current == VALUE_RIGHT_CURLY_BRACKET) {
 						// ] and }
 						openBrackets--;
-						
+
 						if (openBrackets == 0)
 							jsonArray.add(getValue(jsonStr.substring(start, i)));
-					}
-					else if (current == VALUE_COMMA && openBrackets == 1) {
+					} else if (current == VALUE_COMMA && openBrackets == 1) {
 						// ,
 						// only if is on the same level as the most external
 						// brackets
@@ -191,7 +189,7 @@ public class JSONParser {
 		if (str == null || str.length() < 2 || str.charAt(0) != first || str.charAt(str.length() - 1) != last)
 			throw new ErrorJSONInvalid(str);
 	}
-	
+
 	private static String validateString(String str) throws ErrorJSONBadValue {
 		for (int i = 0; i < str.length(); i++) {
 			switch (str.charAt(i)) {
@@ -207,9 +205,9 @@ public class JSONParser {
 		}
 		return str;
 	}
-	
+
 	private static int skipEscaped(String str, int current) throws ErrorJSONBadValue {
-		switch (str.charAt(current+1)) {
+		switch (str.charAt(current + 1)) {
 		case VALUE_QUOTATION:
 		case VALUE_REVERSE_SOLIDUS:
 		case VALUE_SOLIDUS:

@@ -13,7 +13,7 @@ import com.dreangine.json.error.ErrorJSON;
  * @author Omar Vieira Buede
  *
  */
-@SuppressWarnings({"nls", "static-method"})
+@SuppressWarnings({ "nls", "static-method" })
 public class JSONParserTest {
 	private static final String KEY_JSON_OBJECT = "Key object";
 	private static final String KEY_JSON_ARRAY = "Key array";
@@ -49,42 +49,48 @@ public class JSONParserTest {
 			+ VALUE_STRING_WRAPPED + "," + VALUE_BOOLEAN + "," + VALUE_NUMBER + "," + VALUE_NULL + "]";
 
 	/**
-		 * Test method for {@link com.dreangine.json.JSONParser#getValue(java.lang.Object)}.
-	 * @throws ErrorJSON 
-		 */
-		@Test
-		public void testGetValue() throws ErrorJSON {
-			// String
-			assertEquals(VALUE_STRING, JSONParser.getValue(VALUE_STRING_WRAPPED));
-			
-			// Boolean
-			assertEquals(Boolean.TRUE, JSONParser.getValue(Boolean.TRUE.toString()));
-			assertEquals(Boolean.FALSE, JSONParser.getValue(Boolean.FALSE.toString()));
-			
-			// Number
-			assertEquals(Byte.valueOf(Byte.MIN_VALUE), JSONParser.getValue(String.valueOf(Byte.MIN_VALUE)));
-			assertEquals(Byte.valueOf(Byte.MAX_VALUE), JSONParser.getValue(String.valueOf(Byte.MAX_VALUE)));
-			assertEquals(Short.valueOf(Short.MIN_VALUE), JSONParser.getValue(String.valueOf(Short.MIN_VALUE)));
-			assertEquals(Short.valueOf(Short.MAX_VALUE), JSONParser.getValue(String.valueOf(Short.MAX_VALUE)));
-			assertEquals(Integer.valueOf(Integer.MIN_VALUE), JSONParser.getValue(String.valueOf(Integer.MIN_VALUE)));
-			assertEquals(Integer.valueOf(Integer.MAX_VALUE), JSONParser.getValue(String.valueOf(Integer.MAX_VALUE)));
-			assertEquals(Long.valueOf(Long.MIN_VALUE), JSONParser.getValue(String.valueOf(Long.MIN_VALUE)));
-			assertEquals(Long.valueOf(Long.MAX_VALUE), JSONParser.getValue(String.valueOf(Long.MAX_VALUE)));
-			assertEquals(Double.valueOf(String.valueOf(Float.MIN_VALUE)), JSONParser.getValue(String.valueOf(Float.MIN_VALUE)));
-			assertEquals(Double.valueOf(String.valueOf(Float.MAX_VALUE)), JSONParser.getValue(String.valueOf(Float.MAX_VALUE)));
-			assertEquals(Double.valueOf(Double.MIN_VALUE), JSONParser.getValue(String.valueOf(Double.MIN_VALUE)));
-			assertEquals(Double.valueOf(Double.MAX_VALUE), JSONParser.getValue(String.valueOf(Double.MAX_VALUE)));
-			
-			// JSONObject
-			assertEquals(new JSONObject(), JSONParser.getValue(VALUE_JSON_OBJECT));
-			
-			// JSONArray
-			assertEquals(new JSONArray(), JSONParser.getValue(VALUE_JSON_ARRAY));
-		}
+	 * Test method for
+	 * {@link com.dreangine.json.JSONParser#getValue(java.lang.Object)}.
+	 * 
+	 * @throws ErrorJSON
+	 */
+	@Test
+	public void testGetValue() throws ErrorJSON {
+		// String
+		assertEquals(VALUE_STRING, JSONParser.getValue(VALUE_STRING_WRAPPED));
+
+		// Boolean
+		assertEquals(Boolean.TRUE, JSONParser.getValue(Boolean.TRUE.toString()));
+		assertEquals(Boolean.FALSE, JSONParser.getValue(Boolean.FALSE.toString()));
+
+		// Number
+		assertEquals(Byte.valueOf(Byte.MIN_VALUE), JSONParser.getValue(String.valueOf(Byte.MIN_VALUE)));
+		assertEquals(Byte.valueOf(Byte.MAX_VALUE), JSONParser.getValue(String.valueOf(Byte.MAX_VALUE)));
+		assertEquals(Short.valueOf(Short.MIN_VALUE), JSONParser.getValue(String.valueOf(Short.MIN_VALUE)));
+		assertEquals(Short.valueOf(Short.MAX_VALUE), JSONParser.getValue(String.valueOf(Short.MAX_VALUE)));
+		assertEquals(Integer.valueOf(Integer.MIN_VALUE), JSONParser.getValue(String.valueOf(Integer.MIN_VALUE)));
+		assertEquals(Integer.valueOf(Integer.MAX_VALUE), JSONParser.getValue(String.valueOf(Integer.MAX_VALUE)));
+		assertEquals(Long.valueOf(Long.MIN_VALUE), JSONParser.getValue(String.valueOf(Long.MIN_VALUE)));
+		assertEquals(Long.valueOf(Long.MAX_VALUE), JSONParser.getValue(String.valueOf(Long.MAX_VALUE)));
+		assertEquals(Double.valueOf(String.valueOf(Float.MIN_VALUE)),
+				JSONParser.getValue(String.valueOf(Float.MIN_VALUE)));
+		assertEquals(Double.valueOf(String.valueOf(Float.MAX_VALUE)),
+				JSONParser.getValue(String.valueOf(Float.MAX_VALUE)));
+		assertEquals(Double.valueOf(Double.MIN_VALUE), JSONParser.getValue(String.valueOf(Double.MIN_VALUE)));
+		assertEquals(Double.valueOf(Double.MAX_VALUE), JSONParser.getValue(String.valueOf(Double.MAX_VALUE)));
+
+		// JSONObject
+		assertEquals(new JSONObject(), JSONParser.getValue(VALUE_JSON_OBJECT));
+
+		// JSONArray
+		assertEquals(new JSONArray(), JSONParser.getValue(VALUE_JSON_ARRAY));
+	}
 
 	/**
-	 * Test method for {@link com.dreangine.json.JSONParser#getJsonObject(java.lang.String)}.
-	 * @throws ErrorJSON 
+	 * Test method for
+	 * {@link com.dreangine.json.JSONParser#getJsonObject(java.lang.String)}.
+	 * 
+	 * @throws ErrorJSON
 	 */
 	@Test
 	public void testGetJsonObjectString() throws ErrorJSON {
@@ -102,14 +108,16 @@ public class JSONParserTest {
 		jObj.add(KEY_NUMBER, Byte.valueOf(VALUE_NUMBER));
 		jObj.add(KEY_NULL, null);
 		assertEquals(jObj, JSONParser.getJsonObject(JSON_OBJECT_FULL));
-		
+
 		assertEquals(new JSONObject(), JSONParser.getJsonObject(JSON_OBJECT_EMPTY));
 		assertEquals(JSON_OBJECT_COMPLEX, JSONParser.getJsonObject(JSON_OBJECT_COMPLEX).toString());
 	}
 
 	/**
-	 * Test method for {@link com.dreangine.json.JSONParser#getJsonArray(java.lang.String)}.
-	 * @throws ErrorJSON 
+	 * Test method for
+	 * {@link com.dreangine.json.JSONParser#getJsonArray(java.lang.String)}.
+	 * 
+	 * @throws ErrorJSON
 	 */
 	@Test
 	public void testGetJsonArrayString() throws ErrorJSON {
@@ -132,22 +140,24 @@ public class JSONParserTest {
 	}
 
 	/**
-	 * Test method for {@link com.dreangine.json.JSONParser#validateValue(java.lang.Object)}.
-	 * @throws ErrorJSON 
+	 * Test method for
+	 * {@link com.dreangine.json.JSONParser#validateValue(java.lang.Object)}.
+	 * 
+	 * @throws ErrorJSON
 	 */
 	@Test
 	public void testValidateValue() throws ErrorJSON {
 		// Null
 		assertNull(JSONParser.validateValue(null));
-		
+
 		// String
 		assertEquals(VALUE_STRING, JSONParser.validateValue(VALUE_STRING));
 		assertEquals(VALUE_STRING_EMPTY, JSONParser.validateValue(VALUE_STRING_EMPTY));
-		
+
 		// Boolean
 		assertEquals(Boolean.TRUE, JSONParser.validateValue(Boolean.TRUE));
 		assertEquals(Boolean.FALSE, JSONParser.validateValue(Boolean.FALSE));
-		
+
 		// Number
 		assertEquals(Byte.valueOf(Byte.MIN_VALUE), JSONParser.validateValue(Byte.valueOf(Byte.MIN_VALUE)));
 		assertEquals(Byte.valueOf(Byte.MAX_VALUE), JSONParser.validateValue(Byte.valueOf(Byte.MAX_VALUE)));
@@ -161,10 +171,10 @@ public class JSONParserTest {
 		assertEquals(Float.valueOf(Float.MAX_VALUE), JSONParser.validateValue(Float.valueOf(Float.MAX_VALUE)));
 		assertEquals(Double.valueOf(Double.MIN_VALUE), JSONParser.validateValue(Double.valueOf(Double.MIN_VALUE)));
 		assertEquals(Double.valueOf(Double.MAX_VALUE), JSONParser.validateValue(Double.valueOf(Double.MAX_VALUE)));
-		
+
 		// JSONObject
 		assertEquals(new JSONObject(), JSONParser.validateValue(new JSONObject()));
-		
+
 		// JSONArray
 		assertEquals(new JSONArray(), JSONParser.validateValue(new JSONArray()));
 	}
