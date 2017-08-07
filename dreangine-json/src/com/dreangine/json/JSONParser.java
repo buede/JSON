@@ -185,12 +185,7 @@ public class JSONParser {
 		return value;
 	}
 
-	private static void validateLayout(String str, char first, char last) throws ErrorJSONInvalid {
-		if (str == null || str.length() < 2 || str.charAt(0) != first || str.charAt(str.length() - 1) != last)
-			throw new ErrorJSONInvalid(str);
-	}
-
-	private static String validateString(String str) throws ErrorJSONBadValue {
+	public static String validateString(String str) throws ErrorJSONBadValue {
 		for (int i = 0; i < str.length(); i++) {
 			switch (str.charAt(i)) {
 			case VALUE_REVERSE_SOLIDUS:
@@ -204,6 +199,11 @@ public class JSONParser {
 			}
 		}
 		return str;
+	}
+
+	private static void validateLayout(String str, char first, char last) throws ErrorJSONInvalid {
+		if (str == null || str.length() < 2 || str.charAt(0) != first || str.charAt(str.length() - 1) != last)
+			throw new ErrorJSONInvalid(str);
 	}
 
 	private static int skipEscaped(String str, int current) throws ErrorJSONBadValue {

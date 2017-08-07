@@ -1,13 +1,20 @@
 package com.dreangine.json.test;
 
-import static org.junit.Assert.*;
+import static com.dreangine.json.Constants.MSG_ERROR_JSON_BAD_VALUE;
+import static com.dreangine.json.Constants.MSG_ERROR_JSON_UNSUPPORTED_VALUE;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import com.dreangine.json.JSONArray;
 import com.dreangine.json.JSONObject;
 import com.dreangine.json.JSONParser;
 import com.dreangine.json.error.ErrorJSON;
+import com.dreangine.json.error.ErrorJSONBadValue;
+import com.dreangine.json.error.ErrorJSONUnsupportedValue;
 
 /**
  * @author Omar Vieira Buede
@@ -26,6 +33,7 @@ public class JSONParserTest {
 	private static final String VALUE_JSON_ARRAY = "[]";
 	private static final String VALUE_STRING = "Value \\\"str\\\"ing\\\"";
 	private static final String VALUE_STRING_WRAPPED = "\"" + VALUE_STRING + "\"";
+	private static final String VALUE_STRING_MALFORMED = "Value \"str\"ing\\\"";
 	private static final String VALUE_STRING_EMPTY = "";
 	private static final String VALUE_BOOLEAN = Boolean.TRUE.toString();
 	private static final String VALUE_NUMBER = String.valueOf(Byte.MAX_VALUE);
@@ -48,6 +56,9 @@ public class JSONParserTest {
 	private static final String JSON_ARRAY_FULL = "[" + VALUE_JSON_OBJECT + "," + VALUE_JSON_ARRAY + ","
 			+ VALUE_STRING_WRAPPED + "," + VALUE_BOOLEAN + "," + VALUE_NUMBER + "," + VALUE_NULL + "]";
 
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+	
 	/**
 	 * Test method for
 	 * {@link com.dreangine.json.JSONParser#getValue(java.lang.Object)}.
@@ -177,6 +188,24 @@ public class JSONParserTest {
 
 		// JSONArray
 		assertEquals(new JSONArray(), JSONParser.validateValue(new JSONArray()));
+		
+		this.thrown.expect(ErrorJSONUnsupportedValue.class);
+		this.thrown.expectMessage(MSG_ERROR_JSON_UNSUPPORTED_VALUE);
+		JSONParser.validateValue(new ErrorJSON(null));
 	}
 
+	/**
+	 * Test method for
+	 * {@link com.dreangine.json.JSONParser#validateString(String)}.
+	 * 
+	 * @throws ErrorJSON
+	 */
+	@Test
+	public void testValidateString() throws ErrorJSON {
+		assertEquals(VALUE_STRING, JSONParser.validateString(VALUE_STRING));
+		
+		this.thrown.expect(ErrorJSONBadValue.class);
+		this.thrown.expectMessage(MSG_ERROR_JSON_BAD_VALUE);
+		JSONParser.validateString(VALUE_STRING_MALFORMED);
+	}
 }
