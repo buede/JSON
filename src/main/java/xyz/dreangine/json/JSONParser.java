@@ -1,22 +1,22 @@
-package com.dreangine.json;
+package xyz.dreangine.json;
 
-import static com.dreangine.json.Constants.REGEX_NUMBER;
-import static com.dreangine.json.Constants.REGEX_NUMBER_DECIMAL;
-import static com.dreangine.json.Constants.TEXT_NULL;
-import static com.dreangine.json.Constants.VALUE_COLON;
-import static com.dreangine.json.Constants.VALUE_COMMA;
-import static com.dreangine.json.Constants.VALUE_LEFT_CURLY_BRACKET;
-import static com.dreangine.json.Constants.VALUE_LEFT_SQUARE_BRACKET;
-import static com.dreangine.json.Constants.VALUE_QUOTATION;
-import static com.dreangine.json.Constants.VALUE_REVERSE_SOLIDUS;
-import static com.dreangine.json.Constants.VALUE_RIGHT_CURLY_BRACKET;
-import static com.dreangine.json.Constants.VALUE_RIGHT_SQUARE_BRACKET;
-import static com.dreangine.json.Constants.VALUE_SOLIDUS;
+import static xyz.dreangine.json.Constants.REGEX_NUMBER;
+import static xyz.dreangine.json.Constants.REGEX_NUMBER_DECIMAL;
+import static xyz.dreangine.json.Constants.TEXT_NULL;
+import static xyz.dreangine.json.Constants.VALUE_COLON;
+import static xyz.dreangine.json.Constants.VALUE_COMMA;
+import static xyz.dreangine.json.Constants.VALUE_LEFT_CURLY_BRACKET;
+import static xyz.dreangine.json.Constants.VALUE_LEFT_SQUARE_BRACKET;
+import static xyz.dreangine.json.Constants.VALUE_QUOTATION;
+import static xyz.dreangine.json.Constants.VALUE_REVERSE_SOLIDUS;
+import static xyz.dreangine.json.Constants.VALUE_RIGHT_CURLY_BRACKET;
+import static xyz.dreangine.json.Constants.VALUE_RIGHT_SQUARE_BRACKET;
+import static xyz.dreangine.json.Constants.VALUE_SOLIDUS;
 
-import com.dreangine.json.error.ErrorJSON;
-import com.dreangine.json.error.ErrorJSONBadValue;
-import com.dreangine.json.error.ErrorJSONInvalid;
-import com.dreangine.json.error.ErrorJSONUnsupportedValue;
+import xyz.dreangine.json.error.ErrorJSON;
+import xyz.dreangine.json.error.ErrorJSONBadValue;
+import xyz.dreangine.json.error.ErrorJSONInvalid;
+import xyz.dreangine.json.error.ErrorJSONUnsupportedValue;
 
 /**
  * @author Omar Vieira Buede

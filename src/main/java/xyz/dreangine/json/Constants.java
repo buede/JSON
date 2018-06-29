@@ -1,4 +1,4 @@
-package com.dreangine.json;
+package xyz.dreangine.json;
 
 /**
  * @author Omar Vieira Buede

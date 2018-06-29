@@ -1,6 +1,6 @@
-package com.dreangine.json.error;
+package xyz.dreangine.json.error;
 
-import static com.dreangine.json.Constants.MSG_ERROR_JSON_UNSUPPORTED_VALUE;
+import static xyz.dreangine.json.Constants.MSG_ERROR_JSON_UNSUPPORTED_VALUE;
 
 /**
  * @author Omar Vieira Buede

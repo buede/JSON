@@ -1,16 +1,12 @@
-package com.dreangine.json;
+package xyz.dreangine.json;
 
-import static com.dreangine.json.Constants.*;
-import static com.dreangine.json.Constants.VALUE_COMMA;
-import static com.dreangine.json.Constants.VALUE_LEFT_CURLY_BRACKET;
-import static com.dreangine.json.Constants.VALUE_QUOTATION;
-import static com.dreangine.json.Constants.VALUE_RIGHT_CURLY_BRACKET;
+import static xyz.dreangine.json.Constants.*;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.dreangine.json.error.ErrorJSONUnsupportedValue;
+import xyz.dreangine.json.error.ErrorJSONUnsupportedValue;
 
 /**
  * @author Omar Vieira Buede

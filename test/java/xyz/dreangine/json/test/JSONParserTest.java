@@ -1,26 +1,24 @@
-package com.dreangine.json.test;
+package xyz.dreangine.json.test;
 
-import static com.dreangine.json.Constants.MSG_ERROR_JSON_BAD_VALUE;
-import static com.dreangine.json.Constants.MSG_ERROR_JSON_UNSUPPORTED_VALUE;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static xyz.dreangine.json.Constants.MSG_ERROR_JSON_BAD_VALUE;
+import static xyz.dreangine.json.Constants.MSG_ERROR_JSON_UNSUPPORTED_VALUE;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Test;
 
-import com.dreangine.json.JSONArray;
-import com.dreangine.json.JSONObject;
-import com.dreangine.json.JSONParser;
-import com.dreangine.json.error.ErrorJSON;
-import com.dreangine.json.error.ErrorJSONBadValue;
-import com.dreangine.json.error.ErrorJSONUnsupportedValue;
+import xyz.dreangine.json.JSONArray;
+import xyz.dreangine.json.JSONObject;
+import xyz.dreangine.json.JSONParser;
+import xyz.dreangine.json.error.ErrorJSON;
+import xyz.dreangine.json.error.ErrorJSONBadValue;
+import xyz.dreangine.json.error.ErrorJSONUnsupportedValue;
 
 /**
  * @author Omar Vieira Buede
  *
  */
-@SuppressWarnings({ "nls", "static-method" })
 public class JSONParserTest {
 	private static final String KEY_JSON_OBJECT = "Key object";
 	private static final String KEY_JSON_ARRAY = "Key array";
@@ -56,12 +54,12 @@ public class JSONParserTest {
 	private static final String JSON_ARRAY_FULL = "[" + VALUE_JSON_OBJECT + "," + VALUE_JSON_ARRAY + ","
 			+ VALUE_STRING_WRAPPED + "," + VALUE_BOOLEAN + "," + VALUE_NUMBER + "," + VALUE_NULL + "]";
 
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
+//	@Rule
+//	public ExpectedException thrown = ExpectedException.none();
 	
 	/**
 	 * Test method for
-	 * {@link com.dreangine.json.JSONParser#getValue(java.lang.Object)}.
+	 * {@link xyz.dreangine.json.JSONParser#getValue(java.lang.Object)}.
 	 * 
 	 * @throws ErrorJSON
 	 */
@@ -99,7 +97,7 @@ public class JSONParserTest {
 
 	/**
 	 * Test method for
-	 * {@link com.dreangine.json.JSONParser#getJsonObject(java.lang.String)}.
+	 * {@link xyz.dreangine.json.JSONParser#getJsonObject(java.lang.String)}.
 	 * 
 	 * @throws ErrorJSON
 	 */
@@ -126,7 +124,7 @@ public class JSONParserTest {
 
 	/**
 	 * Test method for
-	 * {@link com.dreangine.json.JSONParser#getJsonArray(java.lang.String)}.
+	 * {@link xyz.dreangine.json.JSONParser#getJsonArray(java.lang.String)}.
 	 * 
 	 * @throws ErrorJSON
 	 */
@@ -152,7 +150,7 @@ public class JSONParserTest {
 
 	/**
 	 * Test method for
-	 * {@link com.dreangine.json.JSONParser#validateValue(java.lang.Object)}.
+	 * {@link xyz.dreangine.json.JSONParser#validateValue(java.lang.Object)}.
 	 * 
 	 * @throws ErrorJSON
 	 */
@@ -188,15 +186,16 @@ public class JSONParserTest {
 
 		// JSONArray
 		assertEquals(new JSONArray(), JSONParser.validateValue(new JSONArray()));
-		
-		this.thrown.expect(ErrorJSONUnsupportedValue.class);
-		this.thrown.expectMessage(MSG_ERROR_JSON_UNSUPPORTED_VALUE);
-		JSONParser.validateValue(new ErrorJSON(null));
+
+		// Exception
+		assertThrows(ErrorJSONUnsupportedValue.class, () -> {
+			JSONParser.validateValue(new ErrorJSON(null));
+		}, MSG_ERROR_JSON_UNSUPPORTED_VALUE);
 	}
 
 	/**
 	 * Test method for
-	 * {@link com.dreangine.json.JSONParser#validateString(String)}.
+	 * {@link xyz.dreangine.json.JSONParser#validateString(String)}.
 	 * 
 	 * @throws ErrorJSON
 	 */
@@ -204,8 +203,9 @@ public class JSONParserTest {
 	public void testValidateString() throws ErrorJSON {
 		assertEquals(VALUE_STRING, JSONParser.validateString(VALUE_STRING));
 		
-		this.thrown.expect(ErrorJSONBadValue.class);
-		this.thrown.expectMessage(MSG_ERROR_JSON_BAD_VALUE);
-		JSONParser.validateString(VALUE_STRING_MALFORMED);
+		// Exception
+		assertThrows(ErrorJSONBadValue.class, () -> {
+			JSONParser.validateString(VALUE_STRING_MALFORMED);
+		}, MSG_ERROR_JSON_BAD_VALUE);
 	}
 }

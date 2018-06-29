@@ -1,4 +1,4 @@
-package com.dreangine.json.error;
+package xyz.dreangine.json.error;
 
 /**
  * @author Omar Vieira Buede
